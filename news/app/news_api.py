@@ -2,7 +2,7 @@ from newsapi import NewsApiClient
 from datetime import date, timedelta
 
 
-newsapi = NewsApiClient(api_key='b3fd0106d80644ad8385e25ddd10aef6')
+newsapi = NewsApiClient(api_key='API_KEY')
 today_date = date.today().strftime("%Y-%m-%d")
 yesterday_date = (date.today() - timedelta(1)).strftime("%Y-%m-%d")
 
