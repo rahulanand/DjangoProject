@@ -1,0 +1,54 @@
+{% load static %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/style.css' %}" />
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+             <nav class="navbar navbar-inverse navbar-fixed-top ">
+  		        <div class="container-fluid">
+    		        <div class="navbar-header">
+      			        <a class="navbar-brand" href="/">News@ne</a>
+    		        </div>
+    		        <ul class="nav navbar-nav">
+      			        <li class="active"><a href="/">Home</a></li>
+      			        <li><a href="/cricket">Cricket</a></li>
+      			        <li><a href="#href">Movies</a></li>
+      			        <li><a href="#href">Football</a></li>
+      			        <li><a href="#href">Business</li>
+                        <li><gcse:search></gcse:search></li>
+                        <script>
+  (function() {
+    var cx = '002388634242190280000:wstcim_55yo';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+    		        </ul>
+
+  		        </div>
+             </nav>
+        {% block content %}
+            {% endblock %}
+        </div>
+
+    </div>
+</body>
+</html>
+
