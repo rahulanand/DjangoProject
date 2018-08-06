@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [
@@ -129,4 +130,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     #'/var/www/static/',
 ]
+
+
 STATIC_URL = '/static/'
