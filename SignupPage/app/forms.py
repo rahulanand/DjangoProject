@@ -3,21 +3,27 @@ from django.forms import ModelForm
 from . models import Person
 
 class SignUpForm(ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    #password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Password'}))
-    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'something@domain.com'}))
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
-    #q = forms.CharField(label='search', 
-    #                widget=forms.TextInput(attrs={'placeholder': 'Search'}))
-    #first_name = forms.CharField(label='First Name')
+    password = forms.CharField(widget=forms.PasswordInput())
+    confirm_password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
         model = Person
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'email', 'password']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
+            'email': forms.TextInput(attrs={'placeholder': 'something@domain.com'}),
+        }
+    def clean(self):
+        cleaned_data = super(SignUpForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            raise forms.ValidationError(
+                "Password didn't match, Please enter your Password again"
+            )
 
 class LoginForm(ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Password'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'something@domain.com'}))
     class Meta:
         model = Person
@@ -25,5 +31,8 @@ class LoginForm(ModelForm):
             "email",
             "password"
         ]
+        widgets = {
+            'password': forms.PasswordInput,
+        }
 
 
