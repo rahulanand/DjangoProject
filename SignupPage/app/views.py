@@ -3,9 +3,11 @@ from . forms import SignUpForm, LoginForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.password_validation import validate_password
 from django import forms
 from . models import Person
 from django.contrib.auth.hashers import check_password
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 def index(request):
@@ -15,10 +17,14 @@ def index(request):
             user = form.save(commit=False)
             #email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user.set_password(password)
-            user.save()
+            try:
+                if validate_password(password, password_validators=None) == None:
+                    user.set_password(password)
+                    user.save()
+                    return HttpResponseRedirect('success')
+            except 	ValidationError:
+                messages.error(request, "Please Enter a Strong Password, contains 8 Characters and !@#$%^&*() ")
 
-            return HttpResponseRedirect('success')
     else:
         form = SignUpForm()
 
@@ -44,6 +50,8 @@ def login_view(request):
 
 def success(request):
     return render(request, 'success.html')
+
+
 
 def home_view(request):
     return render(request, 'home.html')
