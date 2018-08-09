@@ -15,7 +15,6 @@ def index(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            #email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             try:
                 if validate_password(password, password_validators=None) == None:
@@ -43,8 +42,7 @@ def login_view(request):
         else:
             # Return an 'invalid login' error message.
             messages.error(request,"Invalid Credentials")
-    else:
-        form = LoginForm()   
+
     form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
