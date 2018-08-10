@@ -10,6 +10,11 @@ class Person(AbstractBaseUser):
     email = models.EmailField("Email", max_length=70, unique=True)
     password = models.CharField("Password", max_length=30)
     timestamp = models.DateTimeField(auto_now_add=True)
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female')
+    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='Male')
 
     USERNAME_FIELD = 'email'
 

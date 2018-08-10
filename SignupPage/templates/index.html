@@ -14,7 +14,7 @@
                 <small>It's Free and always will be!</small>
                 <form method="post">{% csrf_token %}
                     {{ form|bootstrap }}
-                    <input type="submit" value="Submit" class="btn btn-primary">
+                    <input type="submit" onClick="alert('You clicked the button using Javascript.');" value="Submit" class="btn btn-primary">
                 </form>
             
 
