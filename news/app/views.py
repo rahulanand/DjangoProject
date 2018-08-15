@@ -3,7 +3,11 @@ from . news_api import NewsApi, NewsApiEverything
 
 # Create your views here.
 def index(request):
-    news_obj = NewsApi('World')
+    if request.method == 'POST':
+        search_item = request.POST['input']
+        news_obj = NewsApi(search_item)
+    else:
+        news_obj = NewsApi('World')
     discription = news_obj.get_description()
     url = news_obj.get_url()
     images = news_obj.get_images()
