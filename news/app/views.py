@@ -3,9 +3,9 @@ from . news_api import NewsApi, NewsApiEverything
 
 # Create your views here.
 def index(request):
-    if request.method == 'POST':
-        search_item = request.POST['input']
-        news_obj = NewsApi(search_item)
+    query = request.GET.get('search')
+    if query:
+        news_obj = NewsApi(query)
     else:
         news_obj = NewsApi('World')
     discription = news_obj.get_description()
