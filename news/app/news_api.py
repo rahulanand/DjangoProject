@@ -1,10 +1,11 @@
+import os
 from newsapi import NewsApiClient
 from datetime import date, timedelta
 
 
-newsapi = NewsApiClient(api_key='API_KEY')
+newsapi = NewsApiClient(api_key=os.environ.get('API_KEY'))
 today_date = date.today().strftime("%Y-%m-%d")
-yesterday_date = (date.today() - timedelta(1)).strftime("%Y-%m-%d")
+yesterday_date = (date.today() - timepytdelta(1)).strftime("%Y-%m-%d")
 
 class NewsApi(object):
 	def __init__(self, parameter):
