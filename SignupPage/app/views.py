@@ -8,6 +8,7 @@ from django import forms
 from . models import Person
 from django.contrib.auth.hashers import check_password
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -50,6 +51,6 @@ def success(request):
     return render(request, 'success.html')
 
 
-
+@login_required(login_url='/login')
 def home_view(request):
     return render(request, 'home.html')
