@@ -5,7 +5,8 @@ from . news_api import NewsApi, NewsApiEverything
 def index(request):
     query = request.GET.get('search')
     if query:
-        news_obj = NewsApi(query)
+        sources = 'the-times-of-india, the-telegraph, the-hindu, google-news, financial-times, al-zazeera-english, bbc-sport'
+        news_obj = NewsApiEverything(query, sources)
     else:
         news_obj = NewsApi('World')
     discription = news_obj.get_description()
@@ -21,8 +22,13 @@ def index(request):
     return render(request, 'home.html',context)
 
 def cricket_news(request):
-    sources = 'espn-cric-info, fox-sports'
-    news_obj = NewsApiEverything('cricket', sources)
+    query = request.GET.get('search')
+    if query:
+        sources = 'the-times-of-india, the-telegraph, the-hindu, google-news, financial-times, al-zazeera-english, bbc-sport'
+        news_obj = NewsApiEverything(query, sources)
+    else:
+        sources = 'espn-cric-info, fox-sports'
+        news_obj = NewsApiEverything('cricket', sources)
     discription = news_obj.get_description()
     url = news_obj.get_url()
     images = news_obj.get_images()
@@ -32,3 +38,24 @@ def cricket_news(request):
         'mylist': mylist,
     }
     return render(request,'cricket.html',context)
+
+def business_news(request):
+    query = request.GET.get('search')
+    if query:
+        sources = 'the-times-of-india, the-telegraph, the-hindu, google-news, financial-times, al-zazeera-english, bbc-sport'
+        news_obj = NewsApiEverything(query, sources)
+    else:
+        sources = 'business-insider-uk, crypto-coin-news, financial-post, financial-times, the-ecominist, the-times-of-india'
+        news_obj = NewsApiEverything('currency And business', sources)
+    discription = news_obj.get_description()
+    url = news_obj.get_url()
+    images = news_obj.get_images()
+    title = news_obj.get_title()
+    mylist = zip(title, discription, images, url)
+    context = {
+        'mylist': mylist,
+    }
+    return render(request,'cricket.html',context)
+
+def progress_view(request):
+    return render(request, 'progress.html')

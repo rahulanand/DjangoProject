@@ -95,5 +95,8 @@ body {
     text-emphasis-color: rgb(58, 182, 47);
 }
 
-
+#prog {
+    color: #d34836;
+    font-size: 10%;
+}
 

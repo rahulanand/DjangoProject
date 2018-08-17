@@ -21,4 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('cricket/', views.cricket_news),
+    path('business/', views.business_news),
+    path('entertainment/', views.progress_view),
+    path('politics/', views.progress_view),
+    path('travel/', views.progress_view),
+    path('about/', views.progress_view),
 ]
